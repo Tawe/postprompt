@@ -1,6 +1,6 @@
 # Cursor Prompt Logger
 
-A Python script to extract and log AI prompt history from Cursor's local database. This tool helps you keep track of your interactions with Cursor's AI assistant.
+A Python script to extract and log prompt history from Cursor's local database. This tool helps you keep track of your interactions with Cursor's AI assistant.
 
 ## Features
 
@@ -93,7 +93,3 @@ If you encounter any issues:
 1. Run with `--verbose` to see detailed output
 2. Check that you have read permissions for the Cursor database files
 3. Verify that Cursor is installed and has been used (to generate prompt history)
-
-## License
-
-This project is open source and available under the MIT License. 
