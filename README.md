@@ -5,7 +5,6 @@ A Python script to extract and log prompt history from Cursor's local database. 
 ## Features
 
 - Extracts all prompts from Cursor's local databases
-- Sorts prompts by timestamp (most recent first)
 - Includes command type information (chat, completion, edit, etc.)
 - Preserves raw prompt data for reference
 - Works across different operating systems (macOS, Windows, Linux)
