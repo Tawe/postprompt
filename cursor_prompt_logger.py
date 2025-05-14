@@ -4,7 +4,6 @@ import os
 import sqlite3
 import json
 import platform
-import datetime
 import re
 from pathlib import Path
 import argparse
@@ -145,13 +144,10 @@ def extract_prompts_from_value(value, workspace_files):
                     if isinstance(command_type, int) and command_type in COMMAND_TYPES:
                         command_type = COMMAND_TYPES[command_type]
                     
-                    # Use prompt's timestamp if available, otherwise use current time
-                    timestamp = prompt.get('timestamp', datetime.datetime.now().isoformat())
                     
                     extracted_prompts.append({
                         'content': prompt['text'],
                         'command_type': command_type,
-                        'timestamp': timestamp,
                         'raw_data': prompt
                     })
         
@@ -166,12 +162,10 @@ def write_prompts_to_log(prompts, workspace_path, output_file="cursor-prompts.lo
     
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(f"Cursor Prompts Log - Generated at {datetime.datetime.now().isoformat()}\n")
             f.write(f"Workspace: {workspace_path}\n")
             f.write("=" * 80 + "\n\n")
             
             for prompt in prompts:
-                f.write(f"Timestamp: {prompt.get('timestamp', 'Unknown')}\n")
                 f.write(f"Command Type: {prompt.get('command_type', 'Unknown')}\n")
                 f.write("Content:\n")
                 f.write(f"{prompt.get('content', 'No content')}\n")
@@ -239,9 +233,6 @@ def main():
                 continue
         
         print(f"\nTotal prompts found: {len(all_prompts)}")
-        
-        # Sort prompts by timestamp (most recent first)
-        all_prompts.sort(key=lambda x: x['timestamp'], reverse=True)
         
         # Write prompts to log
         if write_prompts_to_log(all_prompts, workspace_path, args.output):
